@@ -211,3 +211,35 @@ def plot_clusters(X, labels, title="Clusters"):
     plt.title(title)
     plt.legend()
     plt.show()
+
+def pairwise_distances(X):
+    diff = X[:, np.newaxis, :] - X[np.newaxis, :, :]
+    return np.sqrt(np.sum(diff**2, axis=2))
+
+
+def silhouette_score(X, labels):
+    mask = labels != -1
+    X = X[mask]
+    labels = labels[mask]
+
+    unique_labels = np.unique(labels)
+    if len(unique_labels) < 2:
+        return None
+
+    D = pairwise_distances(X)
+    sil_scores = []
+
+    for i in range(len(X)):
+        same_cluster = labels == labels[i]
+        other_clusters = labels != labels[i]
+
+        a = np.mean(D[i, same_cluster]) if np.sum(same_cluster) > 1 else 0
+
+        b = np.min([
+            np.mean(D[i, labels == lbl])
+            for lbl in unique_labels if lbl != labels[i]
+        ])
+
+        sil_scores.append((b - a) / max(a, b))
+
+    return np.mean(sil_scores)
