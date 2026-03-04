@@ -13,18 +13,18 @@ The dataset contains non-linear, irregularly shaped clusters with varying densit
 ### Installation
   1. Clone the repository:
 
-    ```bash
+  ```bash
     https://github.com/Leoul39/clustering-algorithms.git
     cd clustering-algorithms
-    ```
+  ```
 
   2. Create a virtual environment and install dependencies:
 
-    ```bash
+  ```bash
     python -m venv venv
     source venv/bin/activate   # On Windows use: venv\Scripts\activate
     pip install -r requirements.txt
-    ```
+  ```
   3. Run the jupyter notebook to see the plots
 ### Technologies Used
   1. Python
